@@ -9,7 +9,7 @@ export interface IComponent {
 
 export default class BaseComponent implements IComponent {
   protected element: HTMLDivElement;
-  
+
   constructor (public width: number, public height: number, public background: string) {
     this.element = document.createElement('div');
     this.element.style.width = `${width}px`;

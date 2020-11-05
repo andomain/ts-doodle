@@ -30,42 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
   //   }
   // }
 
-  // const jump = () => {
-  //   clearInterval(downTimerId);
-  //   isJumping = true;
-  //   upTimerId = window.setInterval(() => {
-  //     doodlerBottomSpace += 20;
-  //     doodler.style.bottom = `${doodlerBottomSpace}px`;
-  //     if (doodlerBottomSpace > startPoint + 200) {
-  //       fall();
-  //     }
-  //   }, 30);
-  // }
-
-  // const fall = () => {
-  //   clearInterval(upTimerId);
-  //   isJumping = false;
-  //   downTimerId = window.setInterval(() => {
-  //     doodlerBottomSpace -= 5;
-  //     doodler.style.bottom = `${doodlerBottomSpace}px`;
-  //     if (doodlerBottomSpace <= 0) {
-  //       gameOver();
-  //     }
-  //     platforms.forEach(platform => {
-  //       if (
-  //         (doodlerBottomSpace >= platform.bottom)
-  //         && (doodlerBottomSpace <= platform.bottom + 15)
-  //         && (doodlerLeftSpace + 60 >= platform.left)
-  //         && (doodlerLeftSpace <= platform.left + 85)
-  //         && !isJumping) {
-  //         console.log('Landed');
-  //         startPoint = doodlerBottomSpace;
-  //         jump();
-  //       }
-  //     })
-  //   }, 30)
-  // }
-
   // const moveLeft = () => {
   //   if (isGoingRight) {
   //     clearInterval(rightTimerId)

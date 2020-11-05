@@ -9,6 +9,8 @@ export default class DoodleGame extends BaseGame {
   protected gameLoopId: number | null;
   protected player: Doodler | null;
 
+  public started: boolean = false;
+
   constructor (container: Grid) {
     super(container);
     this.player = null;
@@ -40,15 +42,27 @@ export default class DoodleGame extends BaseGame {
       console.log('Start Game');
       this.createPlatforms();
       this.createPlayer();
-      setTimeout(() => this.player!.jump(), 1000);
-      this.gameLoopId = window.setInterval(() => {
-        const playerPosition = this.player!.position;
-        if(playerPosition.bottom <= 0) {
-          this.player!.die();
-        }
+      setTimeout(() => {
+        this.player!.jump()
+        this.started = true;
+      }, 1000);
 
-        if (!this.player!.alive) {
-          this.gameOver();
+      this.gameLoopId = window.setInterval(() => {
+        if (this.started) {
+          const playerPosition = this.player!.position;
+          if (playerPosition.bottom <= 0) {
+            this.player!.die();
+          }
+  
+          if (!this.player!.alive) {
+            this.gameOver();
+          }
+  
+          this.platforms.forEach((platform) => {
+            if (this.player!.isOn(platform)) {
+              this.player!.jump();
+            }
+          })
         }
       }, 30)
     }
