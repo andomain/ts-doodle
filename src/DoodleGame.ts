@@ -4,6 +4,7 @@ import Settings from "./cfg/Settings";
 import { IComponent } from "./Components/BaseComponent";
 import Grid from "./Components/Grid";
 import Doodler from "./Components/Doodler";
+import PlatformFactory from "./Components/PlatformFactory";
 
 export default class DoodleGame extends BaseGame {
   protected gameLoopId: number | null;
@@ -21,8 +22,7 @@ export default class DoodleGame extends BaseGame {
   private createPlatforms() {
     for (let i = 0; i < Settings.game.platformCount; i++) {
       const platformInterval = Settings.grid.height / Settings.game.platformCount;
-      const platformLeft = Math.random() * (Settings.grid.width - Settings.platform.width);
-      const platform = new Platform(platformLeft, i * platformInterval);
+      const platform = PlatformFactory.newPlatform(i * platformInterval);
 
       this.container.addComponent(platform);
       this.platforms.push(platform);
@@ -71,6 +71,11 @@ export default class DoodleGame extends BaseGame {
               if (platformPosition.bottom < 0) {
                 this.container.removeComponent(platform);
                 this.platforms.shift();
+
+                const newPlatform = PlatformFactory.newPlatform();
+                this.container.addComponent(newPlatform);
+                this.platforms.push(newPlatform);
+                this.score++;
               }
             }
 

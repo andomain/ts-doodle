@@ -12,24 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // let isGoingLeft = false;
   // let isGoingRight = false;
 
-  // const movePlatforms = () => {
-  //   if (doodlerBottomSpace > 200) {
-  //     platforms.forEach(platform => {
-  //       platform.bottom -= 4;
-  //       let visual = platform.visual;
-  //       visual.style.bottom = `${platform.bottom}px`;
-  //       if (platform.bottom < 10) {
-  //         let firstPlatform = platforms[0].visual;
-  //         firstPlatform.classList.remove('platform');
-  //         platforms.shift();
-  //         const newPlatform = new Platform(600);
-  //         platforms.push(newPlatform);
-  //         score++;
-  //       }
-  //     })
-  //   }
-  // }
-
   // const moveLeft = () => {
   //   if (isGoingRight) {
   //     clearInterval(rightTimerId)
