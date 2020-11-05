@@ -17,5 +17,6 @@ export default {
     width: 80,
     height: 15,
     color: 'green',
+    fallSpeed: 4,
   }
 }

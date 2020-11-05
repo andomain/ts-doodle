@@ -53,16 +53,28 @@ export default class DoodleGame extends BaseGame {
           if (playerPosition.bottom <= 0) {
             this.player!.die();
           }
-  
+
           if (!this.player!.alive) {
             this.gameOver();
           }
-  
+
+          const scrollPlatforms = playerPosition.bottom > Settings.player.jumpHeight;
+
           this.platforms.forEach((platform) => {
             if (this.player!.isOn(platform)) {
               this.player!.jump();
             }
-          })
+
+            if (scrollPlatforms) {
+              platform.moveDown(Settings.platform.fallSpeed);
+              const platformPosition = platform.position;
+              if (platformPosition.bottom < 0) {
+                this.container.removeComponent(platform);
+                this.platforms.shift();
+              }
+            }
+
+          });
         }
       }, 30)
     }

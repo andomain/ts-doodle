@@ -8,4 +8,9 @@ export default class Platform extends MovableComponent {
     super(Settings.platform.width, Settings.platform.height, Settings.platform.color);
     this.update();
   }
+
+  public moveDown(amount: number) {
+    this.bottom -= amount;
+    this.update();
+  }
 }
