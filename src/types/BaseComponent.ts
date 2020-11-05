@@ -1,15 +1,6 @@
-export interface IComponent {
-  width: number;
-  height: number;
-  background: string
+import { IComponent } from '@/interfaces';
 
-  getDOM: () => HTMLElement
-  addComponent: (component: IComponent) => void
-  removeComponent: (component: IComponent) => void
-  clear: () => void
-}
-
-export default class BaseComponent implements IComponent {
+export class BaseComponent implements IComponent {
   protected element: HTMLDivElement;
 
   constructor (public width: number, public height: number, public background: string) {
@@ -19,21 +10,21 @@ export default class BaseComponent implements IComponent {
     this.element.style.backgroundColor = background;
   }
 
-  getDOM() {
+  getDOM(): HTMLElement {
     return this.element;
   }
 
-  addComponent(component: IComponent) {
+  addComponent(component: IComponent): void {
     this.element.appendChild(component.getDOM());
   }
 
-  removeComponent(component: IComponent) {
+  removeComponent(component: IComponent): void {
     if (this.element) {
       this.element.removeChild(component.getDOM());
     }
   }
 
-  clear() {
+  clear(): void {
     this.element.innerHTML = '';
   }
 }

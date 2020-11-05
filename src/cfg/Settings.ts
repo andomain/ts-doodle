@@ -1,4 +1,4 @@
-export default {
+export const Settings = {
   grid: {
     width: 400,
     height: 600,
@@ -25,5 +25,5 @@ export default {
     height: 200,
     color: 'gold',
     fontSize: 200,
-  }
-}
+  },
+};

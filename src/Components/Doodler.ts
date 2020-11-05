@@ -1,64 +1,36 @@
-import Settings from "../cfg/Settings";
-import MovableComponent from "./MovableComponent";
+import { Settings } from '@/cfg'
+import { IPlayer, IKeyboardControl } from '@/interfaces'
+import { MovableComponent } from '@/types'
 
-interface IPlayer {
-  alive: boolean
-  die: () => void
-}
-
-interface iKeyboardControl {
-  keyControl: (e: KeyboardEvent) => void
-}
-
-export default class Doodler extends MovableComponent implements IPlayer, iKeyboardControl {
-  private upTimerId: number | null = null;
-  private downTimerId: number | null = null;
-  private leftTimerId: number | null = null;
-  private rightTimerId: number | null = null;
-
+export class Doodler extends MovableComponent implements IPlayer, IKeyboardControl {
   private startPoint: number;
-  private isJumping: boolean = false;
-  public alive: boolean = true;
+  private isJumping = false;
+  public alive = true;
 
-  private isGoingLeft: boolean = false;
-  private isGoingRight: boolean = false;
+  private isGoingLeft = false;
+  private isGoingRight = false;
 
   constructor (protected left: number, protected bottom: number) {
-    super(Settings.player.width, Settings.player.height, Settings.player.color);
-    this.startPoint = bottom;
-    this.update();
+    super(Settings.player.width, Settings.player.height, Settings.player.color)
+    this.startPoint = bottom
+    this.update()
   }
 
-  public jump() {
+  public jump(): void {
     if (this.downTimerId) {
-      clearInterval(this.downTimerId);
+      clearInterval(this.downTimerId)
     }
-    this.isJumping = true;
+    this.isJumping = true
     this.upTimerId = window.setInterval(() => {
-      this.moveUp();
+      this.moveUp()
       if (this.bottom > this.startPoint + Settings.player.jumpHeight) {
-        this.fall();
-      }
-    }, 30);
-  }
-
-  private fall() {
-    if (this.upTimerId) {
-      clearInterval(this.upTimerId);
-    }
-    this.isJumping = false;
-
-    this.downTimerId = window.setInterval(() => {
-      this.moveDown();
-
-      if (this.bottom <= 0) {
-        this.die();
+        this.fall()
       }
     }, 30)
   }
 
   public isOn(platform: MovableComponent): boolean {
-    const position = platform.position;
+    const position = platform.position
 
     if ((this.bottom >= position.bottom)
       && (this.bottom <= position.bottom + Settings.platform.height)
@@ -66,97 +38,108 @@ export default class Doodler extends MovableComponent implements IPlayer, iKeybo
       && (this.left <= position.left + Settings.platform.width)
       && !this.isJumping
     ) {
-      this.startPoint = this.bottom;
-      return true;
+      this.startPoint = this.bottom
+      return true
     }
 
-    return false;
+    return false
   }
 
   public keyControl(e: KeyboardEvent): void {
     switch (e.key) {
-      case 'ArrowLeft': return this.moveLeft();
-      case 'ArrowRight': return this.moveRight();
-      case 'ArrowUp': return this.moveStraight();
-      default: return;
+      case 'ArrowLeft': return this.moveLeft()
+      case 'ArrowRight': return this.moveRight()
+      case 'ArrowUp': return this.moveStraight()
+      default: return
     }
   }
 
-  private moveUp() {
-    this.bottom += 20;
-    this.update();
+  private fall(): void {
+    if (this.upTimerId) {
+      clearInterval(this.upTimerId)
+    }
+    this.isJumping = false
+
+    this.downTimerId = window.setInterval(() => {
+      this.moveDown()
+    }, 30)
   }
 
-  private moveDown() {
-    this.bottom -= 5;
-    this.update();
+  private moveUp(): void {
+    this.bottom += 20
+    this.update()
   }
 
-  private moveLeft() {
+  private moveDown(): void {
+    this.bottom -= 5
+    this.update()
+  }
+
+  private moveLeft(): void {
     if (this.isGoingRight && this.rightTimerId) {
-      clearInterval(this.rightTimerId);
-      this.isGoingRight = false;
+      clearInterval(this.rightTimerId)
+      this.isGoingRight = false
     } else if (this.isGoingLeft) {
-      return;
+      return
     }
 
-    this.isGoingLeft = true;
+    this.isGoingLeft = true
 
     this.leftTimerId = window.setInterval(() => {
       if (this.left >= 0) {
-        this.left -= Settings.player.moveSpeed;
-        this.update();
+        this.left -= Settings.player.moveSpeed
+        this.update()
       } else {
-        this.moveRight();
+        this.moveRight()
       }
-    }, 30);
+    }, 30)
   }
 
-  private moveRight() {
+  private moveRight(): void {
     if (this.isGoingLeft && this.leftTimerId) {
-      clearInterval(this.leftTimerId);
-      this.isGoingLeft = false;
+      clearInterval(this.leftTimerId)
+      this.isGoingLeft = false
     } else if (this.isGoingRight) {
-      return;
+      return
     }
 
-    this.isGoingRight = true;
+    this.isGoingRight = true
 
     this.rightTimerId = window.setInterval(() => {
       if (this.left <= Settings.grid.width - Settings.player.width) {
-        this.left += Settings.player.moveSpeed;
-        this.update();
+        this.left += Settings.player.moveSpeed
+        this.update()
       } else {
-        this.moveRight();
+        this.moveRight()
       }
-    }, 30);
+    }, 30)
   }
 
-  private moveStraight() {
-    this.isGoingRight = false;
-    this.isGoingLeft = false;
+  private moveStraight(): void {
+    this.isGoingRight = false
+    this.isGoingLeft = false
 
     if (this.leftTimerId) {
-      clearInterval(this.leftTimerId);
+      clearInterval(this.leftTimerId)
     }
     if (this.rightTimerId) {
-      clearInterval(this.rightTimerId);
+      clearInterval(this.rightTimerId)
     }
 
   }
 
-  public stop() {
-    this.moveStraight();
+  public stop(): void {
+    this.moveStraight()
     if (this.upTimerId) {
-      clearInterval(this.upTimerId);
+      clearInterval(this.upTimerId)
     }
     if (this.downTimerId) {
-      clearInterval(this.downTimerId);
+      clearInterval(this.downTimerId)
     }
   }
 
-  die() {
-    this.stop();
-    this.alive = false;
+  public die(): void {
+    this.stop()
+    this.alive = false
   }
 }

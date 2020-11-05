@@ -1,7 +1,7 @@
-import Settings from "../cfg/Settings";
-import MovableComponent from "./MovableComponent";
+import { Settings } from '@/cfg';
+import { MovableComponent } from '@/types';
 
-export default class Score extends MovableComponent {
+export class Score extends MovableComponent {
   public bottom = 0;
   public left = 0;
   constructor (score: number) {

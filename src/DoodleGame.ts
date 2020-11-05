@@ -1,14 +1,8 @@
-import BaseGame from "./Game";
-import Platform from './Components/Platform';
-import Settings from "./cfg/Settings";
-import { IComponent } from "./Components/BaseComponent";
-import Grid from "./Components/Grid";
-import Doodler from "./Components/Doodler";
-import PlatformFactory from "./Components/PlatformFactory";
-import MovableComponent from "./Components/MovableComponent";
-import Score from "./Components/Score";
+import { BaseGame } from "@/types";
+import { Platform, Grid, Doodler, PlatformFactory, Score } from '@/components';
+import { Settings } from "@/cfg";
 
-export default class DoodleGame extends BaseGame {
+export class DoodleGame extends BaseGame {
   protected gameLoopId: number | null;
   protected player: Doodler | null;
 
@@ -101,7 +95,7 @@ export default class DoodleGame extends BaseGame {
     if (this.keyboardListener) {
       document.removeEventListener('keyup', this.keyboardListener);
     }
-    
+
     this.container.clear();
     const score = new Score(this.score);
     this.container.addComponent(score);
