@@ -6,12 +6,13 @@ import Grid from "./Components/Grid";
 import Doodler from "./Components/Doodler";
 
 export default class DoodleGame extends BaseGame {
-
-  protected player: IComponent | null;
+  protected gameLoopId: number | null;
+  protected player: Doodler | null;
 
   constructor (container: Grid) {
     super(container);
     this.player = null;
+    this.gameLoopId = null;
   }
   private platforms: Platform[] = [];
 
@@ -39,9 +40,23 @@ export default class DoodleGame extends BaseGame {
       console.log('Start Game');
       this.createPlatforms();
       this.createPlayer();
+      setTimeout(() => this.player!.jump(), 1000);
+      this.gameLoopId = window.setInterval(() => {
+        const playerPosition = this.player!.position;
+        if(playerPosition.bottom <= 0) {
+          this.player!.die();
+        }
+
+        if (!this.player!.alive) {
+          this.gameOver();
+        }
+      }, 30)
     }
   }
   gameOver() {
     console.log('Game Over');
+    if (this.gameLoopId) {
+      clearInterval(this.gameLoopId);
+    }
   }
 }

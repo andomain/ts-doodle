@@ -11,6 +11,7 @@ export default {
     width: 60,
     height: 85,
     color: 'red',
+    jumpHeight: 200,
   },
   platform: {
     width: 80,

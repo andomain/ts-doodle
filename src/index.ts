@@ -6,28 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const doodleGame = new DoodleGame(grid);
 
   doodleGame.start();
-  setTimeout(() => {
-    doodleGame.gameOver();
-    console.log(doodleGame.getScore());
-  }, 1000);
-  // const doodler = document.createElement('div');
-
-  // const platforms: Platform[] = [];
-
-  // const isGameOver = false;
-  // let startPoint = 150
-  // let doodlerLeftSpace = 50;
-  // let doodlerBottomSpace = startPoint;
-  // let upTimerId: number;
-  // let downTimerId: number;
   // let leftTimerId: number;
   // let rightTimerId: number;
 
-  // let isJumping = true;
   // let isGoingLeft = false;
   // let isGoingRight = false;
-
-  // let score = 0;
 
   // const movePlatforms = () => {
   //   if (doodlerBottomSpace > 200) {
