@@ -9,6 +9,8 @@ interface IGame {
 export default abstract class BaseGame implements IGame {
   public isGameOver: boolean = false;
   protected score = 0;
+  protected abstract player: IComponent | null;
+
   constructor (protected container: IComponent) {
     this.addToBody();
   }

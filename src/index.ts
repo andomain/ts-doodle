@@ -29,41 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // let score = 0;
 
-  // class Platform {
-  //   public bottom: number;
-  //   public left: number;
-  //   public visual: HTMLElement;
-
-  //   constructor (bottomPosition: number) {
-  //     this.bottom = bottomPosition;
-  //     this.left = Math.random() * 315;
-  //     this.visual = document.createElement('div');
-
-  //     this.visual.classList.add('platform');
-  //     this.visual.style.left = `${this.left}px`;
-  //     this.visual.style.bottom = `${this.bottom}px`;
-
-  //     grid.appendChild((this.visual));
-  //   }
-  // }
-
-  // const createDoodler = (parent: HTMLElement, doodler: HTMLElement) => {
-  //   parent.appendChild(doodler);
-  //   doodler.classList.add('doodler');
-  //   doodlerLeftSpace = platforms[0].left;
-  //   doodlerBottomSpace = platforms[0].bottom + 20;
-  //   doodler.style.left = `${doodlerLeftSpace}px`;
-  //   doodler.style.bottom = `${doodlerBottomSpace}px`;
-  // }
-
-  // const createPlatforms = () => {
-  //   for (let i = 0; i < PLATFORM_COUNT; i++) {
-  //     const platformGap = 600 / PLATFORM_COUNT;
-  //     const newPlatformBottom = 100 + i * platformGap;
-  //     platforms.push(new Platform(newPlatformBottom))
-  //   }
-  // }
-
   // const movePlatforms = () => {
   //   if (doodlerBottomSpace > 200) {
   //     platforms.forEach(platform => {
