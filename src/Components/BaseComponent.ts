@@ -4,7 +4,7 @@ export interface IComponent {
   background: string
 
   getDOM: () => HTMLElement
-  addComponent: (component: BaseComponent) => void
+  addComponent: (component: IComponent) => void
 }
 
 export default class BaseComponent implements IComponent {
@@ -21,7 +21,7 @@ export default class BaseComponent implements IComponent {
     return this.element;
   }
 
-  addComponent(component: BaseComponent) {
+  addComponent(component: IComponent) {
     this.element.appendChild(component.getDOM());
   }
 }
