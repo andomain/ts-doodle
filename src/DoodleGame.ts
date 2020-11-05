@@ -12,10 +12,13 @@ export default class DoodleGame extends BaseGame {
 
   public started: boolean = false;
 
+  private keyboardListener: ((e: KeyboardEvent) => void) | null;
+
   constructor (container: Grid) {
     super(container);
     this.player = null;
     this.gameLoopId = null;
+    this.keyboardListener = null;
   }
   private platforms: Platform[] = [];
 
@@ -45,6 +48,10 @@ export default class DoodleGame extends BaseGame {
       setTimeout(() => {
         this.player!.jump()
         this.started = true;
+
+        // Bind keycontrol to the player & register the listener handle
+        this.keyboardListener = this.player!.keyControl.bind(this.player);
+        document.addEventListener('keyup', this.keyboardListener);
       }, 1000);
 
       this.gameLoopId = window.setInterval(() => {
@@ -88,6 +95,9 @@ export default class DoodleGame extends BaseGame {
     console.log('Game Over');
     if (this.gameLoopId) {
       clearInterval(this.gameLoopId);
+    }
+    if (this.keyboardListener) {
+      document.removeEventListener('keyup', this.keyboardListener);
     }
   }
 }
