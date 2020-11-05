@@ -1,11 +1,10 @@
+import Grid from "./Components/Grid";
 import DoodleGame from "./DoodleGame";
 
-const PLATFORM_COUNT = 5;
-
 document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.getElementById('grid')!;
+  const grid = new Grid();
   const doodleGame = new DoodleGame(grid);
-  
+
   doodleGame.start();
   setTimeout(() => {
     doodleGame.gameOver();

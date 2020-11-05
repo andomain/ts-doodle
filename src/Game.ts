@@ -1,13 +1,17 @@
+import { IComponent } from './Components/BaseComponent';
+
 interface IGame {
   start: () => void;
   gameOver: () => void;
   getScore: () => number;
 }
 
-export abstract class BaseGame implements IGame {
+export default abstract class BaseGame implements IGame {
   public isGameOver: boolean = false;
   protected score = 0;
-  constructor (protected container: HTMLElement) { }
+  constructor (protected container: IComponent) {
+    this.addToBody();
+  }
 
   abstract start(): void
 
@@ -15,5 +19,9 @@ export abstract class BaseGame implements IGame {
 
   getScore() {
     return this.score;
+  }
+
+  private addToBody() {
+    document.body.appendChild(this.container.getDOM());
   }
 }
