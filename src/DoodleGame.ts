@@ -5,6 +5,8 @@ import { IComponent } from "./Components/BaseComponent";
 import Grid from "./Components/Grid";
 import Doodler from "./Components/Doodler";
 import PlatformFactory from "./Components/PlatformFactory";
+import MovableComponent from "./Components/MovableComponent";
+import Score from "./Components/Score";
 
 export default class DoodleGame extends BaseGame {
   protected gameLoopId: number | null;
@@ -99,5 +101,9 @@ export default class DoodleGame extends BaseGame {
     if (this.keyboardListener) {
       document.removeEventListener('keyup', this.keyboardListener);
     }
+    
+    this.container.clear();
+    const score = new Score(this.score);
+    this.container.addComponent(score);
   }
 }

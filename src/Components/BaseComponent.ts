@@ -6,6 +6,7 @@ export interface IComponent {
   getDOM: () => HTMLElement
   addComponent: (component: IComponent) => void
   removeComponent: (component: IComponent) => void
+  clear: () => void
 }
 
 export default class BaseComponent implements IComponent {
@@ -30,5 +31,9 @@ export default class BaseComponent implements IComponent {
     if (this.element) {
       this.element.removeChild(component.getDOM());
     }
+  }
+
+  clear() {
+    this.element.innerHTML = '';
   }
 }

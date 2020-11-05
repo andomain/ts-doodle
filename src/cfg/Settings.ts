@@ -19,5 +19,11 @@ export default {
     height: 15,
     color: 'green',
     fallSpeed: 4,
+  },
+  score: {
+    width: 400,
+    height: 200,
+    color: 'gold',
+    fontSize: 200,
   }
 }
