@@ -1,15 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "es2015",
+    "target": "es5",
+    "module": "es6",
+    "outDir": "./dist/",
+    "moduleResolution": "node",
     "lib": [
-      "ES2015",
-      "DOM"
+      "esnext",
+      "dom"
     ],
-    "outDir": "./dist",
-    "rootDir": "src",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "allowJs": true,
     "sourceMap": true,
     "strict": true,
-    "strictNullChecks": true
-  }
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
